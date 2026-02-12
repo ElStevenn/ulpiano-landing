@@ -195,18 +195,22 @@ export function Header() {
             className="flex items-center gap-2.5 group"
             aria-label="ULPIANO inicio"
           >
-            <Image
-              src="/ulpiano-logo.png"
-              alt="Logotipo de ULPIANO"
-              width={36}
-              height={36}
-              className={cn(
-                'transition-all duration-500 group-hover:scale-105',
-                isScrolled ? 'w-[28px] h-[28px]' : 'w-[36px] h-[36px]'
-              )}
-              style={{ filter: 'brightness(1.15)' }}
-              priority
-            />
+            <div className="relative flex items-center justify-center">
+              {/* Glow effect behind logo */}
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-md" />
+              <Image
+                src="/ulpiano-logo.png"
+                alt="Logotipo de ULPIANO"
+                width={40}
+                height={40}
+                className={cn(
+                  'relative z-10 transition-all duration-500 group-hover:scale-105 drop-shadow-lg',
+                  isScrolled ? 'w-[32px] h-[32px]' : 'w-[40px] h-[40px]'
+                )}
+                style={{ filter: 'brightness(1.2) drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
+                priority
+              />
+            </div>
             <span className="text-[17px] font-semibold tracking-[0.08em] text-white/95 group-hover:text-white transition-colors duration-300">
               ULPIANO
             </span>
