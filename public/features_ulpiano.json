@@ -1,0 +1,127 @@
+[
+  {
+    "section": "General",
+    "featureName": "Portal del cliente",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Usuarios incluidos",
+    "freemium": "1",
+    "basico": "2",
+    "esencial": "5"
+  },
+  {
+    "featureName": "Expedientes mensuales",
+    "freemium": "1 anual",
+    "basico": "3",
+    "esencial": "10"
+  },
+  {
+    "featureName": "Almacenamiento",
+    "freemium": "100 MB",
+    "basico": "500 MB",
+    "esencial": "1 GB"
+  },
+  {
+    "featureName": "Soporte por chat y email",
+    "freemium": false,
+    "basico": true,
+    "esencial": true
+  },
+  {
+    "featureName": "Soporte dedicado",
+    "freemium": false,
+    "basico": false,
+    "esencial": false
+  },
+  {
+    "featureName": "Branding personalizado",
+    "freemium": false,
+    "basico": false,
+    "esencial": false
+  },
+  {
+    "section": "Marco Legal",
+    "featureName": "Marco legal (jurisdicciones)",
+    "freemium": "1",
+    "basico": "1",
+    "esencial": "3"
+  },
+  {
+    "featureName": "Plantillas legales básicas",
+    "freemium": true,
+    "basico": true,
+    "esencial": true
+  },
+  {
+    "featureName": "Documentos incluidos: testamento, poderes, voluntades",
+    "freemium": true,
+    "basico": true,
+    "esencial": true
+  },
+  {
+    "featureName": "Gestor documental",
+    "freemium": false,
+    "basico": true,
+    "esencial": true
+  },
+  {
+    "section": "IA Jurídica (Ulpiano AI)",
+    "featureName": "Ulpiano AI (IA básica)",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Asistente jurídico en la redacción de documentos",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "section": "Planificación Sucesoria Avanzada",
+    "featureName": "Crear escenarios sucesorios en un clic",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Comparación de escenarios sucesorios",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Notificaciones de plazos clave",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "section": "Fiscalidad de la Herencia",
+    "featureName": "Simulación fiscal modelo 650",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Reducciones fiscales por herencia",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Reducción por actividades económicas",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  },
+  {
+    "featureName": "Bonificaciones fiscales autonómicas",
+    "freemium": false,
+    "basico": false,
+    "esencial": true
+  }
+]

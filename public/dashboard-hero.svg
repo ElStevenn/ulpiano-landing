@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" fill="none">
+  <rect width="1280" height="800" rx="24" fill="#F7F8FA"/>
+  <rect x="60" y="40" width="180" height="28" rx="6" fill="#0A2540" opacity="0.9"/>
+  <rect x="60" y="88" width="1160" height="640" rx="16" fill="#fff"/>
+
+  <!-- Top cards -->
+  <rect x="120" y="160" width="220" height="140" rx="16" fill="#EEF2FF"/>
+  <rect x="380" y="160" width="220" height="140" rx="16" fill="#FFF4ED"/>
+  <rect x="640" y="160" width="220" height="140" rx="16" fill="#ECFDF3"/>
+  <rect x="900" y="160" width="220" height="140" rx="16" fill="#F9FAFB" stroke="#11111122"/>
+
+  <!-- Immediate attention row -->
+  <rect x="120" y="340" width="1000" height="120" rx="16" fill="#F8FAFC"/>
+  <rect x="150" y="372" width="220" height="56" rx="12" fill="#F3E8FF"/>
+  <rect x="420" y="372" width="220" height="56" rx="12" fill="#FEE2E2"/>
+  <rect x="690" y="372" width="220" height="56" rx="12" fill="#FEF9C3"/>
+  <rect x="960" y="372" width="220" height="56" rx="12" fill="#EEF2FF"/>
+
+  <!-- Table header -->
+  <rect x="120" y="500" width="1000" height="52" rx="12" fill="#F3F4F6"/>
+  <!-- Table rows -->
+  <rect x="120" y="560" width="1000" height="56" rx="12" fill="#FFFFFF" stroke="#11111114"/>
+  <rect x="120" y="624" width="1000" height="56" rx="12" fill="#FFFFFF" stroke="#11111114"/>
+
+  <!-- Soft vignette -->
+  <defs>
+    <radialGradient id="g" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(640 120) rotate(90) scale(320 640)">
+      <stop stop-color="#E3E8FF" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#E3E8FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect x="0" y="0" width="1280" height="400" fill="url(#g)"/>
+</svg>
+
