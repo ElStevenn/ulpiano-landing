@@ -6,6 +6,7 @@ import { Header } from '@/components/site/Header';
 import { Footer } from '@/components/site/Footer';
 import { PageTransition } from '@/components/ui/PageTransition';
 import { BackToTop } from '@/components/ui/BackToTop';
+import { CookieConsent } from '@/components/ui/CookieConsent';
 import { ScrollLock } from '@/components/ui/ScrollLock';
 import { AnalyticsProvider } from '@/components/site/AnalyticsProvider';
 
@@ -111,6 +112,7 @@ export default function RootLayout({
             <BackToTop />
           </PageTransition>
         </AnalyticsProvider>
+        <CookieConsent />
       </body>
     </html>
   );
