@@ -16,6 +16,7 @@
   h5,
   h6 {
     font-family: var(--font-family);
+    letter-spacing: -0.02em;
   }
 
   html {
@@ -38,6 +39,9 @@
     overflow-x: hidden;
     width: 100%;
     max-width: 100vw;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 }
 
@@ -82,8 +86,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* Luminary Branding System */
-  --font-family: var(--font-inter), -apple-system, BlinkMacSystemFont,
-    'Segoe UI', sans-serif;
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', var(--font-inter), sans-serif;
   --font-Playfair: var(--font-playfair);
   --font-Roboto: var(--font-roboto);
 

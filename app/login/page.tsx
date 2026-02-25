@@ -9,7 +9,7 @@ const roles = [
   {
     label: 'Soy profesional',
     description: 'Abogados, notarías, asesorías',
-    href: 'https://ulpiano-backoffice.vercel.app/login',
+    href: 'https://backoffice.ulpiano.es/',
     icon: Briefcase,
     gradientFrom: 'rgba(99,102,241,0.2)',
     gradientTo: 'rgba(139,92,246,0.2)',
@@ -19,7 +19,7 @@ const roles = [
   {
     label: 'Soy cliente',
     description: 'Accede a tu portal de cliente',
-    href: 'https://ulpiano-app.vercel.app/login',
+    href: 'https://app.ulpiano.es/',
     icon: User,
     gradientFrom: 'rgba(6,182,212,0.2)',
     gradientTo: 'rgba(59,130,246,0.2)',

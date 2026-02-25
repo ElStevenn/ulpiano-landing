@@ -1,57 +1,61 @@
 'use client';
 
+import React from 'react';
+import * as framerMotion from 'framer-motion';
 import Link from 'next/link';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
 import { LuminaryButton } from '@/components/ui/LuminaryButton';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CheckCircle } from 'lucide-react';
+import { HeroBackground } from '@/components/hero/HeroBackground';
 
 export default function BeneficiosCorporativosHero() {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = framerMotion.useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const textOpacity = framerMotion.useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const textY = framerMotion.useTransform(scrollYProgress, [0, 0.4], ['0%', '20%']);
+  const bgOpacity = framerMotion.useTransform(scrollYProgress, [0.5, 1], [1, 0]);
+
   return (
-    <section className="relative isolate w-screen -ml-[50vw] left-1/2 right-1/2 overflow-hidden text-white bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
+    <section ref={containerRef} className="relative w-full h-[150vh]" style={{ background: '#030712' }}>
+      <framerMotion.motion.div 
+        style={{ opacity: bgOpacity }}
+        className="sticky top-0 h-screen w-full flex items-center overflow-hidden text-white"
+      >
+        <HeroBackground />
 
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-          backgroundRepeat: 'repeat',
-        }}
-      ></div>
-
-      <div className="relative mx-auto max-w-[1400px] px-3 sm:px-5 lg:px-6">
-        <div className="py-24 md:py-32">
+        <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 w-full pt-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Section - Text and Features */}
-            <div className="space-y-8">
-              <AnimatedSection className="fade-in-up delay-100">
-                <h1 className="text-4xl md:text-5xl font-bold tracking-tight leading-[1.15] text-white">
+            {/* Left Section */}
+            <framerMotion.motion.div 
+              style={{ opacity: textOpacity, y: textY }}
+              className="space-y-8"
+            >
+              
+              <div>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-bold tracking-tight leading-[1.05] text-white mb-6">
                   <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
                     Aporta Seguridad y Ahorro de Tiempo
                   </span>
                   <br />
                   <span className="text-white">a Tus Empleados</span>
                 </h1>
-              </AnimatedSection>
+              </div>
 
-              <AnimatedSection className="fade-in-up delay-200">
-                <p className="text-lg text-gray-300 leading-relaxed">
+              <div>
+                <p className="text-base md:text-xl text-white/60 leading-relaxed font-light mb-8">
                   Con ulpiano.es, grandes empresas pueden incluir en sus planes
                   de beneficios un servicio de planificación y tramitación
                   sucesoria que reduce la complejidad legal y fiscal para los
                   trabajadores.
                 </p>
-              </AnimatedSection>
+              </div>
 
-              <AnimatedSection className="fade-in-up delay-300">
+              <div>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <CheckCircle className="w-6 h-6 text-blue-400 flex-shrink-0 mt-0.5" />
@@ -95,11 +99,15 @@ export default function BeneficiosCorporativosHero() {
                     </div>
                   </div>
                 </div>
-              </AnimatedSection>
-            </div>
+              </div>
+            
+            </framerMotion.motion.div>
 
-            {/* Right Section - Contact Form */}
-            <AnimatedSection className="fade-in-up delay-400">
+            {/* Right Section */}
+            <framerMotion.motion.div 
+              style={{ opacity: textOpacity, y: textY }}
+            >
+              
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
                 <h2 className="text-2xl font-semibold text-white mb-6">
                   Solicita una demo personalizada
@@ -206,18 +214,19 @@ export default function BeneficiosCorporativosHero() {
                   </p>
                 </form>
               </div>
-            </AnimatedSection>
+            
+            </framerMotion.motion.div>
           </div>
         </div>
-      </div>
 
-      {/* Fade transition to next section */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-16"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgb(15 23 42))',
-        }}
-      />
+        {/* Bottom fade */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent, #030712)',
+          }}
+        />
+      </framerMotion.motion.div>
     </section>
   );
 }

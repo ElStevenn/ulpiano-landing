@@ -1,12 +1,13 @@
 'use client';
 
+import React, { useEffect } from 'react';
+import * as framerMotion from 'framer-motion';
 import Image from 'next/image';
-import { pricingConfig } from '@/pricing.config';
-import { useEffect } from 'react';
-import { AnimatedSection } from '@/components/ui/AnimatedSection';
-import { Sparkles, ArrowRight, Play } from 'lucide-react';
 import Link from 'next/link';
+import { pricingConfig } from '@/pricing.config';
+import { Sparkles, ArrowRight, Play } from 'lucide-react';
 import { trackCTA, trackSectionView } from '@/lib/tracking';
+import { HeroBackground } from '@/components/hero/HeroBackground';
 
 type Props = {
   isAnnual: boolean;
@@ -23,23 +24,36 @@ export default function PricingHero({
     trackSectionView('pricing_hero');
   }, []);
 
-  return (
-    <section className="relative w-full text-center overflow-x-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      {/* Background orbs to match home hero mood */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl"></div>
-      </div>
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = framerMotion.useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
 
-      <div className="relative z-10 mx-auto max-w-4xl px-4">
-        <div className="py-24 md:py-28">
+  const textOpacity = framerMotion.useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+  const textY = framerMotion.useTransform(scrollYProgress, [0, 0.4], ['0%', '20%']);
+  const bgOpacity = framerMotion.useTransform(scrollYProgress, [0.5, 1], [1, 0]);
+
+  return (
+    <section ref={containerRef} className="relative w-full h-[120vh]" style={{ background: '#030712' }}>
+      <framerMotion.motion.div 
+        style={{ opacity: bgOpacity }}
+        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden text-white"
+      >
+        <HeroBackground />
+
+        <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 w-full">
+          <framerMotion.motion.div 
+            style={{ opacity: textOpacity, y: textY }}
+            className="max-w-4xl mx-auto text-center space-y-8"
+          >
+            
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-sm font-medium mb-6">
             <Sparkles className="w-4 h-4" />
             <span>Precios transparentes</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4rem] xl:text-[4.5rem] font-bold tracking-tight leading-[1.05] text-white mb-6">
             <span className="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
               Planes diseñados para profesionales
             </span>
@@ -63,7 +77,7 @@ export default function PricingHero({
             ))}
           </div>
 
-          <AnimatedSection className="fade-in-up delay-200">
+          <div>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <button
                 onClick={() => {
@@ -101,9 +115,19 @@ export default function PricingHero({
                 </button>
               </a>
             </div>
-          </AnimatedSection>
+          </div>
+        
+          </framerMotion.motion.div>
         </div>
-      </div>
+
+        {/* Bottom fade */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{
+            background: 'linear-gradient(to bottom, transparent, #030712)',
+          }}
+        />
+      </framerMotion.motion.div>
     </section>
   );
 }
