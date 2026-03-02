@@ -9,7 +9,7 @@ import {
   CardTitle,
   CardDescription,
 } from '@/components/ui/card';
-import { pricingConfig, formatPriceEUR, PlanKey } from '@/pricing.config';
+import { pricingConfig, PlanKey } from '@/pricing.config';
 import { cn } from '@/lib/utils';
 import { Check } from 'lucide-react';
 import { trackPlanSelected } from '@/lib/tracking';
@@ -69,35 +69,6 @@ export default function PlanCard({ planKey, isAnnual, onOpenSales }: Props) {
               {plan.tagline}
             </CardDescription>
 
-            {/* Precio - más prominente */}
-            <div className="mt-7 mb-2">
-              <div className="flex items-baseline justify-center gap-1.5">
-                {plan.monthlyPrice === 0 ? (
-                  <>
-                    <span className="text-4xl font-bold text-slate-900 tracking-tight">
-                      Gratis
-                    </span>
-                    <span className="text-sm font-medium text-slate-500 ml-1">
-                      para siempre
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-5xl font-bold text-slate-900 tracking-tight">
-                      {formatPriceEUR(plan.monthlyPrice)}
-                    </span>
-                    <span className="text-base font-medium text-slate-500">
-                      /mes
-                    </span>
-                  </>
-                )}
-              </div>
-              {plan.monthlyPrice > 0 && (
-                <p className="text-xs text-slate-500 mt-2.5 font-medium">
-                  Precio sin IVA
-                </p>
-              )}
-            </div>
           </CardHeader>
 
           {/* Lista de funcionalidades - más compacta y alineada */}
@@ -192,7 +163,7 @@ export default function PlanCard({ planKey, isAnnual, onOpenSales }: Props) {
                 {ctaLabel}
               </Button>
             )}
-            {plan.notes && plan.monthlyPrice === 0 && (
+            {plan.notes && (
               <p className="text-xs text-slate-500 text-center mt-2 font-medium">
                 {plan.notes}
               </p>

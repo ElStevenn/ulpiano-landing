@@ -153,17 +153,11 @@ export default function CompareTableV2() {
                 <h3 className="text-xs font-extrabold text-indigo-700 uppercase tracking-[0.08em]">
                   Básico
                 </h3>
-                <p className="text-sm text-indigo-700 mt-1.5 font-bold">
-                  99 €/mes
-                </p>
               </div>
               <div className="px-6 py-4 text-center border-l border-slate-200/70">
                 <h3 className="text-xs font-bold text-slate-600 uppercase tracking-[0.08em]">
                   Esencial
                 </h3>
-                <p className="text-sm text-slate-500 mt-1.5 font-semibold">
-                  149 €/mes
-                </p>
               </div>
             </div>
           </div>

@@ -87,19 +87,6 @@ export default function PricingCardsScreenshot({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-slate-200">
             {plans.map((plan) => {
               const isEnterprise = plan.key === 'enterprise';
-              
-              // Cálculo de precio a mostrar
-              let displayPrice: number | null = null;
-              if (plan.priceAnnual !== null) {
-                if (isAnnual) {
-                  displayPrice = plan.priceAnnual;
-                } else {
-                  // Si estamos en mensual, calculamos el precio base (reverso del descuento)
-                  // PrecioAnual = PrecioMensual * (1 - 0.10)
-                  // PrecioMensual = PrecioAnual / 0.9
-                  displayPrice = Math.round(plan.priceAnnual / (1 - DISCOUNT_PERCENT / 100));
-                }
-              }
 
               return (
                 <div
@@ -127,25 +114,6 @@ export default function PricingCardsScreenshot({
                     </p>
                   </div>
 
-                  <div className="text-center mb-8">
-                    {displayPrice !== null ? (
-                      <>
-                        <div className="flex items-baseline justify-center gap-0.5">
-                          <span className="text-4xl font-extrabold text-slate-900">
-                            {displayPrice} €
-                          </span>
-                          <span className="text-lg font-medium text-slate-500">
-                            /mes
-                          </span>
-                        </div>
-                        <p className="text-[10px] text-slate-400 mt-2 max-w-[140px] mx-auto leading-tight">
-                          Precio sin IVA · facturado {isAnnual ? 'anualmente' : 'mensualmente'}
-                        </p>
-                      </>
-                    ) : (
-                      <div className="h-[74px]" /> // Spacer to align with prices
-                    )}
-                  </div>
 
                   <div className="mt-auto">
                     <button
@@ -153,7 +121,7 @@ export default function PricingCardsScreenshot({
                         onOpenSales();
                         trackPlanSelected(
                           plan.name,
-                          displayPrice || 0,
+                          0,
                           isAnnual ? 'anual' : 'mensual',
                           { 
                             cta_type: plan.cta.type,
@@ -168,7 +136,7 @@ export default function PricingCardsScreenshot({
                           : "bg-slate-900 hover:bg-slate-800 text-white"
                       )}
                       data-plan-name={plan.name}
-                      data-plan-price={displayPrice || 0}
+                      data-plan-price={0}
                       data-plan-billing={isAnnual ? 'anual' : 'mensual'}
                       data-cta-type={plan.cta.type}
                     >
