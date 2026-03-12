@@ -1,26 +1,69 @@
 /**
- * Sistema de tracking con GTM y dataLayer
- * Compatible con SSR/SSG de Next.js
+ * Tracking system using GTM dataLayer and Google Consent Mode v2.
+ * Compatible with Next.js SSR/SSG.
  */
 
 import type { BillingType, CTALocation } from './tracking.types';
 
+const CONSENT_STORAGE_KEY = 'ulpiano-cookie-consent';
+
 /**
- * Inicializa window.dataLayer si no existe
- * Debe llamarse en el cliente antes de usar track()
+ * Returns true only if the user has explicitly accepted all cookies.
+ */
+export function hasAnalyticsConsent(): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    return localStorage.getItem(CONSENT_STORAGE_KEY) === 'accepted';
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Updates Google Consent Mode v2 to fully granted.
+ * Call this when the user accepts all cookies.
+ */
+export function updateConsentGranted(): void {
+  if (typeof window === 'undefined') return;
+  window.gtag?.('consent', 'update', {
+    ad_storage: 'granted',
+    analytics_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted',
+  });
+}
+
+/**
+ * Updates Google Consent Mode v2 to fully denied.
+ * Call this when the user rejects non-essential cookies.
+ */
+export function updateConsentDenied(): void {
+  if (typeof window === 'undefined') return;
+  window.gtag?.('consent', 'update', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
+}
+
+/**
+ * Initializes window.dataLayer if it does not already exist.
+ * Must be called on the client before using track().
  */
 export function initDataLayer(): void {
   if (typeof window === 'undefined') return;
-  
+
   if (!window.dataLayer) {
     window.dataLayer = [];
   }
 }
 
 /**
- * Envía un evento al dataLayer de GTM
- * @param eventName - Nombre del evento (ej: "cta_click", "plan_selected")
- * @param params - Parámetros adicionales del evento
+ * Pushes an event to the GTM dataLayer.
+ * Events are silently dropped if the user has not given analytics consent.
+ * @param eventName - Event name (e.g. "cta_click", "plan_selected")
+ * @param params - Additional event parameters
  */
 export function track(
   eventName: string,
@@ -28,14 +71,16 @@ export function track(
 ): void {
   // Guard SSR
   if (typeof window === 'undefined') return;
-  
-  // Asegurar que dataLayer existe
+
+  // Block all tracking until the user has given explicit consent
+  if (!hasAnalyticsConsent()) return;
+
+  // Ensure dataLayer exists
   if (!window.dataLayer) {
-    console.warn('[Tracking] dataLayer no inicializado. Llamar initDataLayer() primero.');
+    console.warn('[Tracking] dataLayer not initialized. Call initDataLayer() first.');
     return;
   }
 
-  // Construir payload
   const payload = {
     event: eventName,
     ...params,
@@ -44,10 +89,8 @@ export function track(
     page_url: window.location.href,
   };
 
-  // Push al dataLayer
   window.dataLayer.push(payload);
 
-  // Log en desarrollo
   if (process.env.NODE_ENV === 'development') {
     console.debug('[Tracking]', eventName, payload);
   }

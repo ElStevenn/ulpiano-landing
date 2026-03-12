@@ -73,7 +73,42 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${inter.variable} ${geistMono.variable}`}>
       <head>
-        {/* Google Tag Manager */}
+        {/*
+         * Google Consent Mode v2 — must run BEFORE GTM loads.
+         * Reads localStorage to restore a previous consent decision.
+         * Defaults to "denied" for new visitors so no data is sent
+         * to Google until the user explicitly accepts cookies.
+         */}
+        {gtmId && (
+          <Script
+            id="consent-mode-init"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+
+                var consentStatus = 'denied';
+                try {
+                  if (localStorage.getItem('ulpiano-cookie-consent') === 'accepted') {
+                    consentStatus = 'granted';
+                  }
+                } catch(e) {}
+
+                gtag('consent', 'default', {
+                  ad_storage:          consentStatus,
+                  analytics_storage:   consentStatus,
+                  ad_user_data:        consentStatus,
+                  ad_personalization:  consentStatus,
+                  wait_for_update:     consentStatus === 'denied' ? 500 : 0
+                });
+              `,
+            }}
+          />
+        )}
+
+        {/* Google Tag Manager — loads after consent defaults are set */}
         {gtmId && (
           <Script
             id="gtm-script"

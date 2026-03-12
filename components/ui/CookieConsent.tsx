@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { updateConsentGranted, updateConsentDenied } from '@/lib/tracking';
 
 const STORAGE_KEY = 'ulpiano-cookie-consent';
 
@@ -19,12 +20,16 @@ export function CookieConsent() {
   function handleAccept() {
     localStorage.setItem(STORAGE_KEY, 'accepted');
     setVisible(false);
+    // Grant all consent signals so GTM can fire analytics tags
+    updateConsentGranted();
     window.dataLayer?.push({ event: 'cookie_consent', action: 'accepted' });
   }
 
   function handleReject() {
     localStorage.setItem(STORAGE_KEY, 'rejected');
     setVisible(false);
+    // Explicitly keep consent denied — no data sent to Google
+    updateConsentDenied();
     window.dataLayer?.push({ event: 'cookie_consent', action: 'rejected' });
   }
 
